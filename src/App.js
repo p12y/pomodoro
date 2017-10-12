@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,21 +8,32 @@ import {
 
 import { NavigationDrawer } from 'react-md';
 import { Button } from 'react-md';
+import NavItemLink from './components/list_item';
 
 const navItems = [{
-  label: 'Home',
+  label: 'Pomodoro Timer',
   to: '/',
   exact: true,
-  icon: 'inbox',
+  icon: 'timer',
+}, {
+  label: 'Custom Timer',
+  to: `/custom`,
+  icon: 'mode_edit',
 }, {
   label: 'About',
   to: `/about`,
-  icon: 'star',
+  icon: 'help_outline',
 }];
 
-const Home = () => (
+const Pomodoro = () => (
   <div>
-    <h2>Home</h2>
+    <h2>Pomodoro</h2>
+  </div>
+)
+
+const Custom = () => (
+  <div>
+    <h2>Custom</h2>
   </div>
 )
 
@@ -32,11 +43,7 @@ const About = () => (
   </div>
 )
 
-const NavItemLink = (props) => (
-  <li><Link to={props.to}>{props.label}</Link></li>
-)
-
-class BasicExample extends Component {
+class BasicExample extends PureComponent {
   
   constructor(props) {
     super(props);
@@ -50,17 +57,27 @@ class BasicExample extends Component {
 
   getCurrentTitle = ({ location: { pathname } }) => {
     const lastSection = pathname.substring(pathname.lastIndexOf('/') + 1);
-    if (lastSection === '') {
-      return 'Pomodoro';
+    switch (lastSection) {
+      case 'custom': {
+        return 'Custom Timer';
+        break;
+      }
+      case 'about': {
+        return 'About';
+        break;
+      }
+      default: {
+        return 'Pomodoro Timer';
+        break;
+      }
     }
-    return lastSection[0].toUpperCase() + lastSection.slice(1);
   }
+
 
   render() {
     const { toolbarTitle } = this.state;
     const { location } = this.props;
     return (
-        <div>
           <NavigationDrawer
           toolbarTitle={toolbarTitle}
           mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY_MINI}
@@ -71,15 +88,12 @@ class BasicExample extends Component {
           contentStyle={null}
           contentClassName="md-grid"
         >
-          <Switch key={""}>
-            <Route path={navItems[0].to} exact component={Home} />
+          <Switch key={"location.pathname"}>
+            <Route path={navItems[0].to} exact component={Pomodoro} />
+            <Route path={navItems[1].to} component={Custom} />
             <Route path={navItems[1].to} component={About} />
           </Switch>
         </NavigationDrawer>
-    
-          <Route exact path="/" component={Home}/>
-          <Route path="/about" component={About}/>
-        </div>
     );
   }
 }
