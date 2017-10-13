@@ -6,7 +6,7 @@ import {
   Link
 } from 'react-router-dom';
 
-import { NavigationDrawer } from 'react-md';
+import { NavigationDrawer, ToolbarTitle } from 'react-md';
 import { Button } from 'react-md';
 import NavItemLink from './components/list_item';
 
@@ -42,6 +42,10 @@ const About = () => (
     <h2>About</h2>
   </div>
 )
+
+const header = () => {
+  return <div>Test</div>
+}
 
 class BasicExample extends PureComponent {
   
@@ -80,13 +84,13 @@ class BasicExample extends PureComponent {
     return (
           <NavigationDrawer
           toolbarTitle={toolbarTitle}
-          mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY_MINI}
-          tabletDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
-          desktopDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
+          mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
+          tabletDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
+          desktopDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
           navItems={navItems.map(props => <NavItemLink {...props} key={props.to} />)}
           contentId="main-demo-content"
-          contentStyle={null}
           contentClassName="md-grid"
+          includeDrawerHeader={false}
         >
           <Switch key={"location.pathname"}>
             <Route path={navItems[0].to} exact component={Pomodoro} />
