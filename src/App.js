@@ -8,7 +8,11 @@ import {
 
 import { NavigationDrawer, ToolbarTitle } from 'react-md';
 import { Button } from 'react-md';
-import NavItemLink from './components/list_item';
+import NavItemLink from './components/nav_link';
+import About from './components/about_content';
+import Pomodoro from './components/pomodoro_content';
+import Settings from './components/settings_content';
+import './App.css';
 
 const navItems = [{
   label: 'Pomodoro Timer',
@@ -16,38 +20,16 @@ const navItems = [{
   exact: true,
   icon: 'timer',
 }, {
-  label: 'Custom Timer',
-  to: `/custom`,
-  icon: 'mode_edit',
+  label: 'Settings',
+  to: `/settings`,
+  icon: 'settings',
 }, {
-  label: 'About',
+  label: 'How does it work?',
   to: `/about`,
   icon: 'help_outline',
 }];
 
-const Pomodoro = () => (
-  <div>
-    <h2>Pomodoro</h2>
-  </div>
-)
-
-const Custom = () => (
-  <div>
-    <h2>Custom</h2>
-  </div>
-)
-
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-)
-
-const header = () => {
-  return <div>Test</div>
-}
-
-class BasicExample extends PureComponent {
+class App extends PureComponent {
   
   constructor(props) {
     super(props);
@@ -62,12 +44,12 @@ class BasicExample extends PureComponent {
   getCurrentTitle = ({ location: { pathname } }) => {
     const lastSection = pathname.substring(pathname.lastIndexOf('/') + 1);
     switch (lastSection) {
-      case 'custom': {
-        return 'Custom Timer';
+      case 'settings': {
+        return 'Settings';
         break;
       }
       case 'about': {
-        return 'About';
+        return 'How does it work?';
         break;
       }
       default: {
@@ -94,12 +76,12 @@ class BasicExample extends PureComponent {
         >
           <Switch key={"location.pathname"}>
             <Route path={navItems[0].to} exact component={Pomodoro} />
-            <Route path={navItems[1].to} component={Custom} />
-            <Route path={navItems[1].to} component={About} />
+            <Route path={navItems[1].to} component={Settings} />
+            <Route path={navItems[2].to} component={About} />
           </Switch>
         </NavigationDrawer>
     );
   }
 }
 
-export default BasicExample
+export default App
