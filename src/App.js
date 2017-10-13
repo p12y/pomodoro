@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
-  Switch,
-  Link
+  Switch
 } from 'react-router-dom';
 
-import { NavigationDrawer, ToolbarTitle } from 'react-md';
-import { Button } from 'react-md';
+import { NavigationDrawer } from 'react-md';
 import NavItemLink from './components/nav_link';
 import About from './components/about_content';
 import Pomodoro from './components/pomodoro_content';
@@ -43,26 +40,27 @@ class App extends PureComponent {
 
   getCurrentTitle = ({ location: { pathname } }) => {
     const lastSection = pathname.substring(pathname.lastIndexOf('/') + 1);
+    let title;
     switch (lastSection) {
       case 'settings': {
-        return 'Settings';
+        title = 'Settings';
         break;
       }
       case 'about': {
-        return 'How does it work?';
+        title =  'How does it work?';
         break;
       }
       default: {
-        return 'Pomodoro Timer';
+        title = 'Pomodoro Timer';
         break;
       }
     }
+    return title;
   }
 
 
   render() {
     const { toolbarTitle } = this.state;
-    const { location } = this.props;
     return (
           <NavigationDrawer
           toolbarTitle={toolbarTitle}
