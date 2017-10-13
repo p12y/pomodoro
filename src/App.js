@@ -3,7 +3,6 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-
 import { NavigationDrawer } from 'react-md';
 import NavItemLink from './components/nav_link';
 import About from './components/about_content';
@@ -26,12 +25,21 @@ const navItems = [{
   icon: 'help_outline',
 }];
 
+function minutesToMilliSeconds(mins) {
+  return (mins * 60) * 100;
+}
+
 class App extends PureComponent {
   
   constructor(props) {
     super(props);
 
-    this.state = { toolbarTitle: this.getCurrentTitle(props) };
+    this.state = {
+                    toolbarTitle: this.getCurrentTitle(props), 
+                    pomodoroLength: minutesToMilliSeconds(25), 
+                    shortBreakLength: minutesToMilliSeconds(5), 
+                    longBreakLength: minutesToMilliSeconds(10) 
+                  };
   }
 
   componentWillReceiveProps(nextProps) {
