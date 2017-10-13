@@ -6,16 +6,16 @@ const Pomodoro = () => (
   <Grid className="grid-example">
     <Cell size={3}></Cell>
     <Cell size={6}>
-    <TabsContainer panelClassName="md-grid">
+    <TabsContainer style={{alignItems: 'center', justifyContent: 'center'}}  panelClassName="md-grid">
     <Tabs centered tabId="simple-tab">
       <Tab label="Pomodoro">
-        <h3>Hello, World!</h3>
+        <Timer />
       </Tab>
       <Tab label="Short Break">
-        <h3>Now look at me!</h3>
+        <Timer />
       </Tab>
       <Tab label="Long Break">
-        <h3>Now look at me!</h3>
+        <Timer />
       </Tab>
     </Tabs>
   </TabsContainer>

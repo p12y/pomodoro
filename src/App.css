@@ -1,3 +1,6 @@
 .md-tabs--centered .md-tab {
-  color: black;
-}
+  color: black; }
+
+.md-tab-panel.md-grid {
+  align-items: center;
+  justify-content: center; }
