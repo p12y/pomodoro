@@ -3,7 +3,7 @@ import { Button, FontIcon } from 'react-md';
 
 const timerStyle = {
                       fontWeight: 700, 
-                      fontSize: '5em', 
+                      fontSize: '7em', 
                       textAlign: 'center', 
                       marginTop: '0.4em', 
                       marginBottom: '0.4em'

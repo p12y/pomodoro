@@ -22,8 +22,10 @@ const navItems = [{
   icon: 'help_outline',
 }];
 
+const DEFAULT_DURATIONS = { pomodoroDuration: 25, shortBreakDuration: 5, longBreakDuration: 10 };
+
 function minutesToMilliSeconds(mins) {
-  return (mins * 60) * 100;
+  return (mins * 60) * 1000;
 }
 
 class App extends PureComponent {
@@ -33,13 +35,20 @@ class App extends PureComponent {
 
     this.state = {
                     toolbarTitle: this.getCurrentTitle(props), 
-                    pomodoroLength: minutesToMilliSeconds(25), 
-                    shortBreakLength: minutesToMilliSeconds(5), 
-                    longBreakLength: minutesToMilliSeconds(10),
+                    pomodoroLength: minutesToMilliSeconds(DEFAULT_DURATIONS.pomodoroDuration), 
+                    shortBreakLength: minutesToMilliSeconds(DEFAULT_DURATIONS.shortBreakDuration), 
+                    longBreakLength: minutesToMilliSeconds(DEFAULT_DURATIONS.longBreakDuration),
+                    pomodoroDuration: DEFAULT_DURATIONS.pomodoroDuration,
+                    shortBreakDuration: DEFAULT_DURATIONS.shortBreakDuration,
+                    longBreakDuration: DEFAULT_DURATIONS.longBreakDuration,
                     runningTimer: null 
                   };
     this.handleTimerStart = this.handleTimerStart.bind(this);
     this.handeTimerStop = this.handeTimerStop.bind(this);
+    this.handleResetSettingsClick = this.handleResetSettingsClick.bind(this);
+    this.handlePomodoroSelectChange = this.handlePomodoroSelectChange.bind(this);
+    this.handleShortBreakSelectChange = this.handleShortBreakSelectChange.bind(this);
+    this.handleLongBreakSelectChange = this.handleLongBreakSelectChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -75,6 +84,22 @@ class App extends PureComponent {
     this.setState({timerIsRunning: timer});
   }
 
+  handlePomodoroSelectChange(value, index, event) {
+    this.setState({pomodoroDuration: value, pomodoroLength: minutesToMilliSeconds(value)});
+  }
+
+  handleShortBreakSelectChange(value, index, event) {
+    this.setState({shortBreakDuration: value});
+  }
+
+  handleLongBreakSelectChange(value, index, event) {
+    this.setState({longBreakDuration: value});
+  }
+
+  handleResetSettingsClick() {
+    this.setState({ pomodoroDuration: DEFAULT_DURATIONS.pomodoroDuration, shortBreakDuration: DEFAULT_DURATIONS.shortBreakDuration, longBreakDuration: DEFAULT_DURATIONS.longBreakDuration });
+  }
+
   render() {
     const { toolbarTitle } = this.state;
     return (
@@ -97,6 +122,9 @@ class App extends PureComponent {
                                     onTimerStart={this.handleTimerStart} 
                                     onTimerStop={this.handeTimerStop} 
                                     runningTimer={this.state.runningTimer}
+                                    pomodoroDuration={minutesToMilliSeconds(this.state.pomodoroDuration)} 
+                                    shortBreakDuration={minutesToMilliSeconds(this.state.shortBreakDuration)}
+                                    longBreakDuration={minutesToMilliSeconds(this.state.longBreakDuration)}
                                   />
                                  )
                       } 
@@ -104,7 +132,15 @@ class App extends PureComponent {
             <Route 
               path={navItems[1].to} 
               render={(props) => (
-                                  <Settings {...props} />
+                                  <Settings {...props}
+                                     pomodoroDuration={this.state.pomodoroDuration}
+                                     shortBreakDuration={this.state.shortBreakDuration}
+                                     longBreakDuration={this.state.longBreakDuration}
+                                     handlePomodoroSelectChange={this.handlePomodoroSelectChange}
+                                     handleShortBreakSelectChange={this.handleShortBreakSelectChange}
+                                     handleLongBreakSelectChange={this.handleLongBreakSelectChange}
+                                     handleResetSettingsClick={this.handleResetSettingsClick}
+                                  />
                                  )
                       } 
             />

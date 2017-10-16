@@ -28,7 +28,7 @@ class Pomodoro extends Component {
             runningTimer={this.props.runningTimer} 
             onTimerStart={this.props.onTimerStart} 
             onTimerStop={this.props.onTimerStop} 
-            duration={1500000} 
+            duration={this.props.pomodoroDuration} 
             stopped={this.state.stopped}
           />
         </Tab>
@@ -37,7 +37,7 @@ class Pomodoro extends Component {
             runningTimer={this.props.runningTimer} 
             onTimerStart={this.props.onTimerStart} 
             onTimerStop={this.props.onTimerStop} 
-            duration={300000} 
+            duration={this.props.shortBreakDuration} 
             stopped={this.state.stopped}
           />
         </Tab>
@@ -46,7 +46,7 @@ class Pomodoro extends Component {
             runningTimer={this.props.runningTimer} 
             onTimerStart={this.props.onTimerStart} 
             onTimerStop={this.props.onTimerStop} 
-            duration={600000} 
+            duration={this.props.longBreakDuration} 
             stopped={this.state.stopped}
           />
         </Tab>
