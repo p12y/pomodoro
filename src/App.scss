@@ -7,3 +7,12 @@
   align-items: center;
   justify-content: center;
 }
+
+@media only screen and (max-width : 410px) {
+  .buttons_group button {
+    font-size: 0.9em;
+    .buttons_group button span.md-icon-text {
+      padding-left: 0;
+    }
+  }
+}

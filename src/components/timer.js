@@ -69,7 +69,7 @@ class Timer extends Component {
     return (
       <div className="timer">
         <div style={timerStyle}>{formatMilliseconds(this.state.duration)}</div>
-        <div className="buttons__group"><Button onClick={this.handleStartClick} disabled={!this.state.stopped} style={buttonStyle} raised secondary iconEl={<FontIcon>play_arrow</FontIcon>}>START</Button>
+        <div className="buttons_group"><Button onClick={this.handleStartClick} disabled={!this.state.stopped} style={buttonStyle} raised secondary iconEl={<FontIcon>play_arrow</FontIcon>}>START</Button>
         <Button onClick={this.handleStopClick} disabled={this.state.stopped} style={buttonStyle} raised primary iconEl={<FontIcon>stop</FontIcon>}>
           STOP
         </Button>
