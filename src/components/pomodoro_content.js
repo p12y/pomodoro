@@ -7,7 +7,7 @@ class Pomodoro extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { stopped: false };
+    this.state = { stopped: true };
     this.handleTabChange = this.handleTabChange.bind(this);
   }
 

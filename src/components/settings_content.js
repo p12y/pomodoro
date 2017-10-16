@@ -1,5 +1,11 @@
-import React, { Component } from 'react';
-import { Card, CardTitle, CardText, SelectField, Button, FontIcon } from 'react-md';
+import React from 'react';
+import { Card, 
+  CardTitle, 
+  CardText, 
+  SelectField, 
+  Button, 
+  FontIcon 
+} from 'react-md';
 
 const style = { maxWidth: '60em', marginTop: '4em' };
 
@@ -8,7 +14,10 @@ const TIME_ITEMS = [...Array(60)].map((_,i) => i).slice(1);
 const Settings = (props) => {
   return (
     <Card style={style} className="md-block-centered">
-      <CardTitle title="Timer Settings" subtitle="Set the timer and break durations in minutes" />
+      <CardTitle 
+        title="Timer Settings" 
+        subtitle="Set the timer and break durations in minutes" 
+      />
       <CardText>
         <SelectField
           id="pomodoro-duration"
