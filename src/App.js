@@ -38,8 +38,11 @@ class App extends PureComponent {
                     toolbarTitle: this.getCurrentTitle(props), 
                     pomodoroLength: minutesToMilliSeconds(25), 
                     shortBreakLength: minutesToMilliSeconds(5), 
-                    longBreakLength: minutesToMilliSeconds(10) 
+                    longBreakLength: minutesToMilliSeconds(10),
+                    runningTimer: null 
                   };
+    this.handleTimerStart = this.handleTimerStart.bind(this);
+    this.handeTimerStop = this.handeTimerStop.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,24 +69,63 @@ class App extends PureComponent {
     return title;
   }
 
+  handleTimerStart(timer, component) {
+    clearInterval(this.state.runningTimer);
+    this.setState({runningTimer: timer});
+  }
+
+  handeTimerStop(timer) {
+    this.setState({timerIsRunning: timer});
+  }
 
   render() {
     const { toolbarTitle } = this.state;
     return (
           <NavigationDrawer
-          toolbarTitle={toolbarTitle}
-          mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
-          tabletDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
-          desktopDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
-          navItems={navItems.map(props => <NavItemLink {...props} key={props.to} />)}
-          contentId="main-demo-content"
-          contentClassName="md-grid"
-          includeDrawerHeader={false}
-        >
+            toolbarTitle={toolbarTitle}
+            mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
+            tabletDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
+            desktopDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
+            navItems={navItems.map(props => <NavItemLink {...props} key={props.to} />)}
+            contentId="main-demo-content"
+            contentClassName="md-grid"
+            includeDrawerHeader={false}
+          >
           <Switch key={"location.pathname"}>
-            <Route path={navItems[0].to} exact component={Pomodoro} />
-            <Route path={navItems[1].to} component={Settings} />
-            <Route path={navItems[2].to} component={About} />
+            <Route 
+              path={navItems[0].to} 
+              exact 
+              render={(props) => (
+                                  <Pomodoro {...props} 
+                                    onTimerStart={this.handleTimerStart} 
+                                    onTimerStop={this.handeTimerStop} 
+                                    runningTimer={this.state.runningTimer}
+                                  />
+                                 )
+                      } 
+            />
+            <Route 
+              path={navItems[1].to} 
+              render={(props) => (
+                                  <Settings {...props} 
+                                    onTimerStart={this.handleTimerStart} 
+                                    onTimerStop={this.handeTimerStop} 
+                                    runningTimer={this.state.runningTimer}
+                                  />
+                                 )
+                      } 
+            />
+            <Route 
+              path={navItems[2].to} 
+              render={(props) => (
+                                  <About {...props} 
+                                    onTimerStart={this.handleTimerStart} 
+                                    onTimerStop={this.handeTimerStop} 
+                                    runningTimer={this.state.runningTimer}
+                                  />
+                                 )
+                      } 
+            />
           </Switch>
         </NavigationDrawer>
     );

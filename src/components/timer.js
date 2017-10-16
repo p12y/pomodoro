@@ -23,7 +23,7 @@ class Timer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { started: false, stopped: true, pomodoroDuration: 1500000 };
+    this.state = { started: false, stopped: this.props.stopped, duration: this.props.duration };
     this.handleStartClick = this.handleStartClick.bind(this);
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
@@ -37,17 +37,20 @@ class Timer extends Component {
   handleStopClick() {
     this.setState({ stopped: true, started: false });
     this.stopTimer();
+    this.props.onTimerStop();
   }
 
   handleResetClick() {
-    this.setState({ started: false, stopped: true, pomodoroDuration: 1500000 });
+    this.setState({ started: false, stopped: true, duration: this.props.duration });
     this.stopTimer();
+    this.props.onTimerStop();
   }
 
   startTimer() {
     timer = setInterval(() => {
-      this.setState({ pomodoroDuration: this.state.pomodoroDuration - 100 });
+      this.setState({ duration: this.state.duration - 100 });
     }, 100);
+    this.props.onTimerStart(timer, this);
   }
 
   stopTimer() {
@@ -56,10 +59,16 @@ class Timer extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.stopped !== this.state.stopped) {
+      this.handleResetClick();
+    }
+  }
+
   render() {
     return (
       <div>
-        <div style={timerStyle}>{formatMilliseconds(this.state.pomodoroDuration)}</div>
+        <div style={timerStyle}>{formatMilliseconds(this.state.duration)}</div>
         <Button onClick={this.handleStartClick} disabled={this.state.started} style={buttonStyle} raised secondary iconEl={<FontIcon>play_arrow</FontIcon>}>START</Button>
         <Button onClick={this.handleStopClick} disabled={this.state.stopped} style={buttonStyle} raised primary iconEl={<FontIcon>stop</FontIcon>}>
           STOP
