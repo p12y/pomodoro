@@ -3,7 +3,7 @@ import { Card, CardTitle, CardText } from 'react-md';
 
 const style = { maxWidth: '60em', marginTop: '4em' };
 
-const Simple = () => (
+const About = () => (
   <Card style={style} className="md-block-centered">
     <CardTitle title="The Pomodoro Technique" subtitle="" />
     <CardText>
@@ -15,4 +15,4 @@ const Simple = () => (
   </Card>
 );
 
-export default Simple;
+export default About;
