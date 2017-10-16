@@ -22,7 +22,6 @@ const About = () => (
       </ol>
       <p>The aim of the technique is to reduce the impact of internal and external interruptions on focus and flow. 
         If you are interrupted during a pomoro, the other activity must be recorded and postponed or the pomodoro must be abandoned.</p>
-
     </CardText>
   </Card>
 );
