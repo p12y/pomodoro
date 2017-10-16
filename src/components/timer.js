@@ -60,7 +60,7 @@ class Timer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.stopped !== this.state.stopped) {
+    if (this.props.runningTimer == nextProps.runningTimer) {
       this.handleResetClick();
     }
   }
