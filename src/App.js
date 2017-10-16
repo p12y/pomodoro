@@ -104,22 +104,14 @@ class App extends PureComponent {
             <Route 
               path={navItems[1].to} 
               render={(props) => (
-                                  <Settings {...props} 
-                                    onTimerStart={this.handleTimerStart} 
-                                    onTimerStop={this.handeTimerStop} 
-                                    runningTimer={this.state.runningTimer}
-                                  />
+                                  <Settings {...props} />
                                  )
                       } 
             />
             <Route 
               path={navItems[2].to} 
               render={(props) => (
-                                  <About {...props} 
-                                    onTimerStart={this.handleTimerStart} 
-                                    onTimerStop={this.handeTimerStop} 
-                                    runningTimer={this.state.runningTimer}
-                                  />
+                                  <About {...props} />
                                  )
                       } 
             />
