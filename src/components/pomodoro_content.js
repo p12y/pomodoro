@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Timer from './timer'
-import { Grid, Cell, TabsContainer, Tabs, Tab } from 'react-md';
+import { TabsContainer, Tabs, Tab } from 'react-md';
 
 class Pomodoro extends Component {
 
@@ -17,7 +17,11 @@ class Pomodoro extends Component {
 
   render() {
     return (
-      <TabsContainer onTabChange={this.handleTabChange} style={{alignItems: 'center', justifyContent: 'center'}}  panelClassName="md-grid">
+      <TabsContainer 
+        onTabChange={this.handleTabChange} 
+        style={{alignItems: 'center', justifyContent: 'center'}}  
+        panelClassName="md-grid"
+      >
       <Tabs centered tabId="simple-tab">
         <Tab label="Pomodoro">
           <Timer 

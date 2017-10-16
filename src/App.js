@@ -1,8 +1,5 @@
 import React, { PureComponent } from 'react';
-import {
-  Route,
-  Switch
-} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { NavigationDrawer } from 'react-md';
 import NavItemLink from './components/nav_link';
 import About from './components/about_content';

@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Button, FontIcon } from 'react-md';
 
-const timerStyle = {fontWeight: 700, fontSize: '5em', textAlign: 'center', marginTop: '0.4em', marginBottom: '0.4em'};
-const buttonStyle = {marginRight: '1em'};
+const timerStyle = {
+                      fontWeight: 700, 
+                      fontSize: '5em', 
+                      textAlign: 'center', 
+                      marginTop: '0.4em', 
+                      marginBottom: '0.4em'
+                    };
+
+const buttonStyle = { marginRight: '1em' };
 
 function formatMilliseconds(ms) {
   let minutes = ms / 1000 / 60;
@@ -24,6 +31,7 @@ class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = { stopped: this.props.stopped, duration: this.props.duration };
+    
     this.handleStartClick = this.handleStartClick.bind(this);
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
@@ -60,7 +68,7 @@ class Timer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.runningTimer == nextProps.runningTimer) {
+    if (this.props.runningTimer === nextProps.runningTimer) {
       this.handleResetClick();
     }
   }
@@ -69,13 +77,36 @@ class Timer extends Component {
     return (
       <div className="timer">
         <div style={timerStyle}>{formatMilliseconds(this.state.duration)}</div>
-        <div className="buttons_group"><Button onClick={this.handleStartClick} disabled={!this.state.stopped} style={buttonStyle} raised secondary iconEl={<FontIcon>play_arrow</FontIcon>}>START</Button>
-        <Button onClick={this.handleStopClick} disabled={this.state.stopped} style={buttonStyle} raised primary iconEl={<FontIcon>stop</FontIcon>}>
-          STOP
+        <div className="buttons_group">
+          <Button 
+            onClick={this.handleStartClick} 
+            disabled={!this.state.stopped} 
+            style={buttonStyle} 
+            raised 
+            secondary 
+            iconEl={<FontIcon>play_arrow</FontIcon>}
+          >
+            START
+          </Button>
+          <Button 
+            onClick={this.handleStopClick} 
+            disabled={this.state.stopped} 
+            style={buttonStyle} 
+            raised 
+            primary 
+            iconEl={<FontIcon>stop</FontIcon>}
+          >
+            STOP
         </Button>
-        <Button onClick={this.handleResetClick} style={buttonStyle} raised iconEl={<FontIcon>refresh</FontIcon>}>
+        <Button 
+          onClick={this.handleResetClick} 
+          style={buttonStyle} 
+          raised 
+          iconEl={<FontIcon>refresh</FontIcon>}
+        >
           RESET
-        </Button></div>
+        </Button>
+        </div>
       </div>
     );
   }
