@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FontIcon } from 'react-md';
 
-const timerStyle = {fontWeight: 700, fontSize: '5em', textAlign: 'center'};
+const timerStyle = {fontWeight: 700, fontSize: '5em', textAlign: 'center', marginTop: '0.4em', marginBottom: '0.4em'};
 const buttonStyle = {marginRight: '1em'};
 
 function formatMilliseconds(ms) {
@@ -23,25 +23,25 @@ class Timer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { started: false, stopped: this.props.stopped, duration: this.props.duration };
+    this.state = { stopped: this.props.stopped, duration: this.props.duration };
     this.handleStartClick = this.handleStartClick.bind(this);
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
   }
 
   handleStartClick() {
-    this.setState({ started: true, stopped: false });
+    this.setState({ stopped: false });
     this.startTimer();
   }
 
   handleStopClick() {
-    this.setState({ stopped: true, started: false });
+    this.setState({ stopped: true });
     this.stopTimer();
     this.props.onTimerStop();
   }
 
   handleResetClick() {
-    this.setState({ started: false, stopped: true, duration: this.props.duration });
+    this.setState({ stopped: true, duration: this.props.duration });
     this.stopTimer();
     this.props.onTimerStop();
   }
@@ -67,15 +67,15 @@ class Timer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="timer">
         <div style={timerStyle}>{formatMilliseconds(this.state.duration)}</div>
-        <Button onClick={this.handleStartClick} disabled={this.state.started} style={buttonStyle} raised secondary iconEl={<FontIcon>play_arrow</FontIcon>}>START</Button>
+        <div className="buttons__group"><Button onClick={this.handleStartClick} disabled={!this.state.stopped} style={buttonStyle} raised secondary iconEl={<FontIcon>play_arrow</FontIcon>}>START</Button>
         <Button onClick={this.handleStopClick} disabled={this.state.stopped} style={buttonStyle} raised primary iconEl={<FontIcon>stop</FontIcon>}>
           STOP
         </Button>
         <Button onClick={this.handleResetClick} style={buttonStyle} raised iconEl={<FontIcon>refresh</FontIcon>}>
           RESET
-        </Button>
+        </Button></div>
       </div>
     );
   }

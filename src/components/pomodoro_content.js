@@ -17,9 +17,6 @@ class Pomodoro extends Component {
 
   render() {
     return (
-      <Grid className="grid-example">
-      <Cell size={3}></Cell>
-      <Cell size={6}>
       <TabsContainer onTabChange={this.handleTabChange} style={{alignItems: 'center', justifyContent: 'center'}}  panelClassName="md-grid">
       <Tabs centered tabId="simple-tab">
         <Tab label="Pomodoro">
@@ -51,9 +48,6 @@ class Pomodoro extends Component {
         </Tab>
       </Tabs>
     </TabsContainer>
-      </Cell>
-      <Cell size={3}></Cell>
-    </Grid>
     );
   }
 
