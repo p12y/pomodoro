@@ -35,9 +35,6 @@ class App extends PureComponent {
 
     this.state = {
                     toolbarTitle: this.getCurrentTitle(props), 
-                    pomodoroLength: minutesToMilliSeconds(DEFAULT_DURATIONS.pomodoroDuration), 
-                    shortBreakLength: minutesToMilliSeconds(DEFAULT_DURATIONS.shortBreakDuration), 
-                    longBreakLength: minutesToMilliSeconds(DEFAULT_DURATIONS.longBreakDuration),
                     pomodoroDuration: DEFAULT_DURATIONS.pomodoroDuration,
                     shortBreakDuration: DEFAULT_DURATIONS.shortBreakDuration,
                     longBreakDuration: DEFAULT_DURATIONS.longBreakDuration,
@@ -85,7 +82,7 @@ class App extends PureComponent {
   }
 
   handlePomodoroSelectChange(value, index, event) {
-    this.setState({pomodoroDuration: value, pomodoroLength: minutesToMilliSeconds(value)});
+    this.setState({pomodoroDuration: value});
   }
 
   handleShortBreakSelectChange(value, index, event) {
@@ -97,7 +94,11 @@ class App extends PureComponent {
   }
 
   handleResetSettingsClick() {
-    this.setState({ pomodoroDuration: DEFAULT_DURATIONS.pomodoroDuration, shortBreakDuration: DEFAULT_DURATIONS.shortBreakDuration, longBreakDuration: DEFAULT_DURATIONS.longBreakDuration });
+    this.setState({ 
+      pomodoroDuration: DEFAULT_DURATIONS.pomodoroDuration, 
+      shortBreakDuration: DEFAULT_DURATIONS.shortBreakDuration, 
+      longBreakDuration: DEFAULT_DURATIONS.longBreakDuration 
+    });
   }
 
   render() {
