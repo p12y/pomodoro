@@ -9,7 +9,7 @@ import { Card,
 
 const style = { maxWidth: '60em', marginTop: '4em' };
 
-const TIME_ITEMS = [...Array(60)].map((_,i) => i).slice(1);
+const TIME_ITEMS = [...Array(61)].map((_,i) => i).slice(1);
 
 const Settings = (props) => {
   return (

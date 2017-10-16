@@ -22,7 +22,7 @@ const navItems = [{
   icon: 'help_outline',
 }];
 
-const DEFAULT_DURATIONS = { pomodoroDuration: 25, shortBreakDuration: 5, longBreakDuration: 10 };
+const DEFAULT_DURATIONS = { pomodoroDuration: 25, shortBreakDuration: 5, longBreakDuration: 15 };
 
 function minutesToMilliSeconds(mins) {
   return (mins * 60) * 1000;
